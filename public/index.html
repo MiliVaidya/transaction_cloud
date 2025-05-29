@@ -9,10 +9,22 @@
     <input type="text" id="accountNumber" placeholder="Account Number" required /><br/>
     <input type="number" id="amount" placeholder="Amount" required /><br/>
     <button type="submit">Submit Transaction</button>
+  <button onclick="checkTransaction()">Check Transaction Status</button>
   </form>
   <p id="response"></p>
 
   <script>
+     function checkTransaction() {
+      fetch("/transaction")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("response").innerText = data.status;
+        })
+        .catch(error => {
+          document.getElementById("response").innerText = "Error: " + error;
+        });
+    }
+    
     document.getElementById('txnForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const res = await fetch('/process', {

@@ -49,41 +49,13 @@ async function uploadBlob(blobName, data) {
   }
 }
 
-// Helper function to convert stream to string
-async function streamToString(readableStream) {
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    readableStream.on("data", (data) => {
-      chunks.push(data.toString());
-    });
-    readableStream.on("end", () => {
-      resolve(chunks.join(""));
-    });
-    readableStream.on("error", reject);
-  });
-}
-
+app.get("/transaction", (req, res) => {
+  res.json({ status: "Transaction processed by mainframe." });
+});
 // API endpoints for blob operations
 app.post("/upload", async (req, res) => {
   const { blobName, data } = req.body;
   const result = await uploadBlob(blobName, data);
-  res.json(result);
-});
-
-app.get("/download/:blobName", async (req, res) => {
-  const { blobName } = req.params;
-  const result = await downloadBlob(blobName);
-  res.json(result);
-});
-
-app.get("/list", async (req, res) => {
-  const result = await listBlobs();
-  res.json(result);
-});
-
-app.delete("/delete/:blobName", async (req, res) => {
-  const { blobName } = req.params;
-  const result = await deleteBlob(blobName);
   res.json(result);
 });
 
