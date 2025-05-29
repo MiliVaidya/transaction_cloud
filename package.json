@@ -1,0 +1,12 @@
+{
+  "name": "transaction-app",
+  "version": "1.0.0",
+  "description": "A simple transaction processing app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
